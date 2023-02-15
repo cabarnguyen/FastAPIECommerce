@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
 
+
 class User(BaseModel):
     name : str = Field(...)
     email : EmailStr = Field(...)
@@ -9,9 +10,16 @@ class User(BaseModel):
     #     self.name = name
     #     self.email= email
     #     self.password= password
+
+
 def ResponseModel(data, message):
     return {
         "data": [data],
         "code": 200,
         "message": message,
     }
+
+
+class SignInModel(BaseModel):
+    user_name: str
+    password: str

@@ -1,7 +1,12 @@
 import os
+from decouple import config
 
-APP_ENV = os.getenv('APP_ENV', 'development')
-DATABASE_USERNAME = os.getenv('DATABASE_USERNAME', 'admin')
-DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', '123456')
-DATABASE_HOST = os.getenv('DATABASE_HOST', 'localhost')
-DATABASE_NAME = os.getenv('DATABASE_NAME', 'commerce')
+APP_ENV = config('APP_ENV')
+DATABASE_USERNAME = config('DATABASE_USERNAME')
+DATABASE_PASSWORD = config('DATABASE_PASSWORD')
+DATABASE_HOST = config('DATABASE_HOST')
+DATABASE_NAME = config('DATABASE_NAME')
+CONNECTION_STRING = config('CONNECTION_STRING')
+JWT_SECRET = config('JWT_SECRET')
+JWT_ALGORITHM = config('JWT_ALGORITHM')
+JWT_EXPIRES_SECOND = int(config('JWT_EXPIRES_SECOND'))
