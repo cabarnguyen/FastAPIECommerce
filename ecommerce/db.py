@@ -1,9 +1,21 @@
+import motor.motor_asyncio
+
 from . import config
 from pymongo import mongo_client
 
-client = mongo_client.MongoClient(f'mongodb://{config.DATABASE_USERNAME}:{config.DATABASE_PASSWORD}@{config.DATABASE_HOST}/{config.DATABASE_NAME}')
+connection_string = f'mongodb://{config.DATABASE_USERNAME}:{config.DATABASE_PASSWORD}@{config.DATABASE_HOST}/{config.DATABASE_NAME}'
+
+# Connection by pymongo
+client_py_mongo = mongo_client.MongoClient(connection_string)
+
+# connection by motor
+client_motor = motor.motor_asyncio.AsyncIOMotorClient("mongodb://localhost:27017/")
+
 print('Connected to MongoDB...')
-db = client.commerce
+db = client_py_mongo.commerce
+db_motor = client_motor["commerce"]
 
 users = db.get_collection('users')
+inventories = db_motor["inventories"]
+customers = db_motor["customers"]
 
